@@ -4,7 +4,7 @@ import {
     CardActionArea,
     CardContent,
     CardMedia,
-    Grid,
+    Grid, GridList, GridListTile, GridListTileBar, IconButton,
     makeStyles,
     Paper,
     TextField, Typography
@@ -18,24 +18,37 @@ import {setMovies} from "../features/movies/Movies";
 
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
+    paperSearch: {
         padding: theme.spacing(2),
         display: "flex",
         flexDirection:"row",
         flexWrap:"wrap",
         justifyContent:"center"
     },
-    card: {
+    paperList: {
         padding: theme.spacing(2),
         display: "flex",
         flexDirection:"row",
         flexWrap:"wrap",
-        margin:"5px",
-        width:"150px",
-        alignItems:"flex-start"
+        justifyContent:"center",
+        background:"silver"
+    },
+    card: {
+        padding: theme.spacing(2),
+        background:"white",
+        width:"28%",
+        display: "flex",
+        flexDirection:"row",
+        borderRadius:"5px",
+        margin:"5px"
+    },
+    cardArea:{
+        display: "flex",
+        flexDirection:"row",
     },
     cardMedia:{
-        width:"100%"
+        width:"50px",
+        height:"80px"
     },
     input:{
         flex:1,
@@ -91,28 +104,31 @@ function MovieList() {
         <div>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paperSearch}>
                         <TextField value className={classes.input} value={search} onChange={(event)=>setSearch(event.target.value)} color="primary" label="Search for Movies" variant="outlined" />
                         <Button variant="contained" color="primary" onClick={()=>startSearch(search)}>Search</Button>
                     </Paper>
                 </Grid>
                 {
                     movies.length?<Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                {movies.map(r=><Card className={classes.card}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            className={classes.cardMedia}
-                                            component="img"
-                                            alt="Contemplative Reptile"
-                                            image={r.Poster}
-                                            title={r.Title}
-                                        />
-                                        <CardContent>
-                                            <b>{r.Title}</b>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>)}
+                            <Paper className={classes.paperList}>
+
+                                <GridList cellHeight={180} className={classes.gridList}>
+                                    {movies.map(r=>
+                                        <GridListTile key={r.imdbID}>
+                                            <img src={r.Poster} alt={r.Title} />
+                                            <GridListTileBar
+                                                title={r.Title}
+                                                subtitle={<span>year: {r.Year}</span>}
+                                                actionIcon={
+                                                    <IconButton aria-label={`info about ${r.Title}`} className={classes.icon}>
+
+                                                    </IconButton>
+                                                }
+                                            />
+                                        </GridListTile>
+                                   )}
+                                </GridList>
                             </Paper>
                         </Grid>:null
                 }
