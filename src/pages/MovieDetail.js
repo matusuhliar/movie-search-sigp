@@ -1,9 +1,7 @@
-import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {getMovies} from "../modules/movies";
 import {getMovie} from "../modules/movie";
-import {Box, Grid, makeStyles, Paper, Typography} from "@material-ui/core";
+import {makeStyles, Paper} from "@material-ui/core";
 import {StarBorder} from "@material-ui/icons";
 import {EMPTY_IMAGE, LOCAL_STORAGE_KEY} from "../Constants";
 
@@ -31,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 function MovieDetail(props) {
     const classes = useStyles();
-    const location = useLocation();
     const dispatch = useDispatch();
     const [lastId, setLastId] = useState("");
     const movie = useSelector(state =>state.movie.movie)
@@ -42,7 +39,7 @@ function MovieDetail(props) {
             dispatch(getMovie(props.match.params.id))
         }
 
-    });
+    },[lastId, props.match.params.id, dispatch]);
 
 
     const inLocalStorage = (id)=>{

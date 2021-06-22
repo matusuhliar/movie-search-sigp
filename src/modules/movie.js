@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {getMovieAPI, getMoviesAPI} from "../api/API";
+import {getMovieAPI} from "../api/API";
 
 const GET_MOVIE = 'GET_MOVIE';
 const CLEAN_MOVIE = 'CLEAN_MOVIE';

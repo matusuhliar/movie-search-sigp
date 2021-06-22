@@ -75,14 +75,14 @@ function MovieList() {
             setLastPage(qs.page)
             dispatch(getMovies(qs.search,qs.page))
         }
-    });
+    },[qs.search, qs.page, lastSearch, lastPage, dispatch]);
 
     return (
         <div>
             <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <Paper className={classes.paperSearch}>
-                        <TextField value className={classes.input} value={search} onChange={(event)=>setSearch(event.target.value)} color="primary" label="Search for Movies" variant="outlined" />
+                        <TextField className={classes.input} value={search} onChange={(event)=>setSearch(event.target.value)} color="primary" label="Search for Movies" variant="outlined" />
                         <Button variant="contained" color="primary" onClick={()=>startSearch(search,1)}>Search</Button>
                     </Paper>
                 </Grid>

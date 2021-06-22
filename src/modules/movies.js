@@ -1,7 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {getMoviesAPI} from "../api/API";
-import {useDispatch} from "react-redux";
 
 const GET_MOVIES = 'GET_MOVIES';
 const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS';

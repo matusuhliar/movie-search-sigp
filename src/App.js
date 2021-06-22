@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Box, Container, Divider, Grid, Link, makeStyles, Paper, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Container, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import MovieList from "./pages/MovieList";
 import {Route, Switch} from 'react-router-dom'
 import {useHistory} from "react-router";
