@@ -3,9 +3,10 @@ import {
     makeStyles,
     Paper
 } from "@material-ui/core";
-import React from "react";
+import React, {useState} from "react";
 import {useHistory} from "react-router";
 import {EMPTY_IMAGE, LOCAL_STORAGE_KEY} from "../Constants";
+import {Delete} from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +45,21 @@ function Favourite() {
     const openDetail = (id) =>{
         history.push('/detail/'+id)
     }
+
+    const [count, setCount] = useState(0);
+    const removeFromFavorites = (event,id) => {
+        event.stopPropagation();
+        let items = localStorage.getItem(LOCAL_STORAGE_KEY)
+        if(!items){
+            items = {};
+        }else{
+            items = JSON.parse(items);
+        }
+        delete items[id]
+        localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(items))
+        setCount(count+1)
+    }
+
     return (
         <div>
             <Grid container spacing={1}>
@@ -58,6 +74,11 @@ function Favourite() {
                                         <GridListTileBar
                                             title={r.Title}
                                             subtitle={<span>year: {r.Year}</span>}
+                                            actionIcon={
+                                                <IconButton aria-label={`info about ${r.Title}`} className={classes.icon}>
+                                                    <Delete onClick={(event)=>removeFromFavorites(event,r.imdbID)} color="secondary" />
+                                                </IconButton>
+                                            }
                                         />
                                     </GridListTile>
                                 )}
