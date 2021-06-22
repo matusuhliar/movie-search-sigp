@@ -10,11 +10,10 @@ import {
     TextField, Typography
 } from "@material-ui/core";
 import React, {useEffect, useRef, useState} from "react";
-import {API_KEY} from "../Constants";
 import queryString from 'query-string'
 import {useHistory, useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {setMovies} from "../features/movies/Movies";
+import {getMovies} from "../modules/movies";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +74,8 @@ function MovieList() {
     useEffect(() => {
         if(qs.search!==lastSearch){
             setLastSearch(qs.search);
-            fetch(`http://omdbapi.com/?${queryString.stringify({s:qs.search,apikey:API_KEY})}`).then(
+            dispatch(getMovies(qs.search))
+           /* fetch(`http://omdbapi.com/?${queryString.stringify({s:qs.search,apikey:API_KEY})}`).then(
                 response => response.json()
             ).then(json=>{
                 if(json.Response === "True"){
@@ -85,7 +85,7 @@ function MovieList() {
                 }
             }).catch(e=>{
                 dispatch(setMovies([]))
-            })
+            })*/
         }
     });
 

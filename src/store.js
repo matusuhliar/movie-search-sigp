@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import movies from "./features/movies/Movies";
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import modules, { rootSaga } from './modules';
+const logger = createLogger();
 
+const sagaMiddleware = createSagaMiddleware();
 
-const store =  configureStore({
-    reducer: {
-        movies
-    },
-})
+const store = createStore(modules, applyMiddleware(logger, sagaMiddleware));
+sagaMiddleware.run(rootSaga);
+
 export default store;
