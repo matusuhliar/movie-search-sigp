@@ -1,19 +1,10 @@
 import {
-    Button,
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
     Grid, GridList, GridListTile, GridListTileBar, IconButton,
     makeStyles,
-    Paper,
-    TextField, Typography
+    Paper
 } from "@material-ui/core";
-import React, {useEffect, useRef, useState} from "react";
-import queryString from 'query-string'
-import {useHistory, useLocation} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {getMovies} from "../modules/movies";
+import React from "react";
+import {useHistory} from "react-router";
 import {EMPTY_IMAGE, LOCAL_STORAGE_KEY} from "../Constants";
 
 
