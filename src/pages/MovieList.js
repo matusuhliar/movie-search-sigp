@@ -7,9 +7,9 @@ import {
     Grid, GridList, GridListTile, GridListTileBar, IconButton,
     makeStyles,
     Paper,
-    TextField, Typography
+    TextField
 } from "@material-ui/core";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import queryString from 'query-string'
 import {useHistory, useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";

@@ -19,7 +19,6 @@ html,body{
 
 .detail .properties .item{
     font-size:12px;
-    width:50%
 }
 .detail .properties .item b{
     font-size:12px;
@@ -30,8 +29,18 @@ html,body{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width:100%
 }
+.detail .properties .items .left,.detail .properties .items .right{
+    width:50%
+}
+
+
 .detail .properties h2{
     padding:0px 0px;
     margin:0px;
+}
+
+.detail .properties h2 svg{
+    cursor:pointer;
 }

@@ -4,6 +4,7 @@ import MovieList from "./pages/MovieList";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {useHistory} from "react-router";
 import MovieDetail from "./pages/MovieDetail";
+import Favourite from "./pages/Favourite";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,7 +42,7 @@ function App() {
     const history = useHistory();
 
     const openFavourites = () =>{
-        history.push('/favourites/')
+        history.push('/favourite/')
     }
     const openSearch = () =>{
         history.push('/')
@@ -67,6 +68,8 @@ function App() {
             <Switch>
                 <Route exact path="/" component={MovieList} />
                 <Route exact path="/detail/:id" component={MovieDetail} />
+                <Route exact path="/favourite" component={Favourite} />
+
             </Switch>
         </Container>
     );
