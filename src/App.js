@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar, Box, Container, Divider, Grid, Link, makeStyles, Paper, Toolbar, Typography} from "@material-ui/core";
 import MovieList from "./pages/MovieList";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {useHistory} from "react-router";
 import MovieDetail from "./pages/MovieDetail";
 import Favourite from "./pages/Favourite";
