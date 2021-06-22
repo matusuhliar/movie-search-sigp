@@ -5,7 +5,7 @@ import {getMovies} from "../modules/movies";
 import {getMovie} from "../modules/movie";
 import {Box, Grid, makeStyles, Paper, Typography} from "@material-ui/core";
 import {StarBorder} from "@material-ui/icons";
-import {LOCAL_STORAGE_KEY} from "../Constants";
+import {EMPTY_IMAGE, LOCAL_STORAGE_KEY} from "../Constants";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -77,7 +77,7 @@ function MovieDetail(props) {
         return (
             <Paper className={classes.paper}>
                 <div className="detail">
-                    <img className={classes.poster} src={movie.Poster} />
+                    {movie.Poster!=="N/A"?<img src={movie.Poster} alt={movie.Title} />:<img src={EMPTY_IMAGE} alt={movie.Title}/>}
                     <div className="properties">
                         <h2>{movie.Title} <StarBorder color={inStorage?"primary":"secondary"} onClick={()=>addToFavourites({imdbID:movie.imdbID, Title:movie.Title, Year: movie.Year, Poster:movie.Poster})} /></h2>
                         <div className={"description"}>{movie['Plot']}</div>
@@ -108,35 +108,6 @@ function MovieDetail(props) {
                 </div>
             </Paper>
         )
-
-        /*
-        Actors: "Karen Black, Bruce Dern, Barbara Harris"
-Awards: "2 wins & 6 nominations"
-BoxOffice: "N/A"
-Country: "United States"
-DVD: "19 Apr 2016"
-Director: "Alfred Hitchcock"
-Genre: "Comedy, Crime, Drama"
-Language: "English"
-Metascore: "79"
-Plot: "A phony psychic/con artist and her taxi driver/private investigator boyfriend encounter a pair of serial kidnappers while trailing a missing heir in California."
-Poster: "https://m.media-amazon.com/images/M/MV5BZWE5NDI0OTktNWZkZi00OTQ5LTg2ZTctNzljNDFmZmYyYWEzXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_SX300.jpg"
-Production: "Universal Pictures"
-Rated: "PG"
-Ratings: [{Source: "Internet Movie Database", Value: "6.8/10"}, {Source: "Rotten Tomatoes", Value: "92%"},…]
-Released: "09 Apr 1976"
-Response: "True"
-Runtime: "120 min"
-Title: "Family Plot"
-Type: "movie"
-Website: "N/A"
-Writer: "Ernest Lehman, Victor Canning"
-Year: "1976"
-imdbID: "tt0074512"
-imdbRating: "6.8"
-imdbVotes: "21,236"
-        * */
-
     }
 
     return null;

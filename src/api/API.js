@@ -2,8 +2,8 @@ import queryString from "query-string";
 import {API_KEY} from "../Constants";
 import axios from "axios";
 
-export function getMoviesAPI(search) {
-    const url = `http://omdbapi.com/?${queryString.stringify({s:search,apikey:API_KEY})}`
+export function getMoviesAPI(search,page) {
+    const url = `http://omdbapi.com/?${queryString.stringify({s:search, apikey:API_KEY, page:page})}`
     return axios.get(url);
 }
 

@@ -14,6 +14,8 @@ import queryString from 'query-string'
 import {useHistory, useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovies} from "../modules/movies";
+import Pagination from '@material-ui/lab/Pagination';
+import {EMPTY_IMAGE} from "../Constants";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,18 +54,18 @@ function MovieList() {
 
     //set current search base on location
     const [search, setSearch] = useState(qs.search||"");
-    const startSearch = (search) =>{
-        history.push('/?'+queryString.stringify({search}))
+    const startSearch = (search,page) =>{
+        history.push('/?'+queryString.stringify({search,page}))
     }
+    const page = qs.page?parseInt(qs.page):1
 
 
     const dispatch = useDispatch()
     //load results
-    const movies = useSelector(state => {
-        return state.movies.movies;
-    })
+    const movies = useSelector(state =>state.movies.movies)
+    const total = useSelector(state => state.movies.total )
     const [lastSearch, setLastSearch] = useState("");
-
+    const [lastPage, setLastPage] = useState(page);
 
     //set detail
     const openDetail = (id) =>{
@@ -72,12 +74,12 @@ function MovieList() {
 
     // load data on change
     useEffect(() => {
-        if(qs.search!==lastSearch){
+        if(qs.search!==lastSearch || lastPage!==qs.page){
             setLastSearch(qs.search);
-            dispatch(getMovies(qs.search))
+            setLastPage(qs.page)
+            dispatch(getMovies(qs.search,qs.page))
         }
     });
-
 
     return (
         <div>
@@ -85,7 +87,7 @@ function MovieList() {
                 <Grid item xs={12}>
                     <Paper className={classes.paperSearch}>
                         <TextField value className={classes.input} value={search} onChange={(event)=>setSearch(event.target.value)} color="primary" label="Search for Movies" variant="outlined" />
-                        <Button variant="contained" color="primary" onClick={()=>startSearch(search)}>Search</Button>
+                        <Button variant="contained" color="primary" onClick={()=>startSearch(search,1)}>Search</Button>
                     </Paper>
                 </Grid>
                 {
@@ -95,7 +97,7 @@ function MovieList() {
                                 <GridList cellHeight={180} className={classes.item}>
                                     {movies.map(r=>
                                         <GridListTile key={r.imdbID} onClick={()=>openDetail(r.imdbID)}>
-                                            <img src={r.Poster} alt={r.Title} />
+                                            {r.Poster!=="N/A"?<img src={r.Poster} alt={r.Title} />:<img src={EMPTY_IMAGE} alt={r.Title}/>}
                                             <GridListTileBar
                                                 title={r.Title}
                                                 subtitle={<span>year: {r.Year}</span>}
@@ -103,6 +105,8 @@ function MovieList() {
                                         </GridListTile>
                                    )}
                                 </GridList>
+                                <Pagination count={Math.ceil(total/10)} page={page} size="small" onChange={(event,page)=>startSearch(search,page)}/>
+
                             </Paper>
                         </Grid>:null
                 }

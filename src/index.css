@@ -8,6 +8,10 @@ html,body{
 .detail *{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+.detail img{
+    width: 150px;
+}
+
 .detail .properties{
     padding:0px 10px
 }

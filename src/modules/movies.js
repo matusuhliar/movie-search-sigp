@@ -8,12 +8,12 @@ const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS';
 const GET_MOVIES_FAILURE = 'GET_MOVIES_FAILURE';
 const CLEAN_MOVIES = 'CLEAN_MOVIES';
 
-export const getMovies = createAction(GET_MOVIES, search => search);
+export const getMovies = createAction(GET_MOVIES, (search,page) =>{return {search,page}});
 
 function* getMoviesSaga(action) {
     yield put({ type: CLEAN_MOVIES })
     try {
-        const response = yield call(getMoviesAPI, action.payload);
+        const response = yield call(getMoviesAPI, action.payload.search,action.payload.page);
         yield put({ type: GET_MOVIES_SUCCESS, payload: response });
     } catch (e) {
         yield put({ type: GET_MOVIES_FAILURE, payload: e });
@@ -21,7 +21,8 @@ function* getMoviesSaga(action) {
 }
 
 const initialState = {
-    movies: []
+    movies: [],
+    total: 0
 };
 
 export function* moviesSaga() {
@@ -33,17 +34,20 @@ export default handleActions(
         [GET_MOVIES_SUCCESS]: (state, action) => {
             if(action.payload.data.Response === "True"){
                 return {
-                    movies: action.payload.data.Search
+                    movies: action.payload.data.Search,
+                    total: parseInt(action.payload.data.totalResults)
                 };
             }else{
                 return {
-                    movies: []
+                    movies: [],
+                    total: 0
                 };
             }
         },
         [CLEAN_MOVIES]: (state, action) => {
             return {
-                movies: []
+                movies: [],
+                total: 0
             }
         }
     },

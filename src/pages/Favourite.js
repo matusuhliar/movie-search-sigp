@@ -14,7 +14,7 @@ import queryString from 'query-string'
 import {useHistory, useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {getMovies} from "../modules/movies";
-import {LOCAL_STORAGE_KEY} from "../Constants";
+import {EMPTY_IMAGE, LOCAL_STORAGE_KEY} from "../Constants";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +63,7 @@ function Favourite() {
                             <GridList cellHeight={180} className={classes.item}>
                                 {movies.map(r=>
                                     <GridListTile key={r.imdbID} onClick={()=>openDetail(r.imdbID)}>
-                                        <img src={r.Poster} alt={r.Title} />
+                                        {r.Poster!=="N/A"?<img src={r.Poster} alt={r.Title} />:<img src={EMPTY_IMAGE} alt={r.Title}/>}
                                         <GridListTileBar
                                             title={r.Title}
                                             subtitle={<span>year: {r.Year}</span>}
