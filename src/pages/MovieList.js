@@ -30,25 +30,10 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection:"row",
         flexWrap:"wrap",
-        justifyContent:"center",
-        background:"silver"
+        justifyContent:"center"
     },
-    card: {
-        padding: theme.spacing(2),
-        background:"white",
-        width:"28%",
-        display: "flex",
-        flexDirection:"row",
-        borderRadius:"5px",
-        margin:"5px"
-    },
-    cardArea:{
-        display: "flex",
-        flexDirection:"row",
-    },
-    cardMedia:{
-        width:"50px",
-        height:"80px"
+    item:{
+        cursor:"pointer"
     },
     input:{
         flex:1,
@@ -80,6 +65,11 @@ function MovieList() {
     })
     const [lastSearch, setLastSearch] = useState("");
 
+
+    //set detail
+    const openDetail = (id) =>{
+        history.push('/detail/'+id)
+    }
 
     // load data on change
     useEffect(() => {
@@ -113,18 +103,13 @@ function MovieList() {
                     movies.length?<Grid item xs={12}>
                             <Paper className={classes.paperList}>
 
-                                <GridList cellHeight={180} className={classes.gridList}>
+                                <GridList cellHeight={180} className={classes.item}>
                                     {movies.map(r=>
-                                        <GridListTile key={r.imdbID}>
+                                        <GridListTile key={r.imdbID} onClick={()=>openDetail(r.imdbID)}>
                                             <img src={r.Poster} alt={r.Title} />
                                             <GridListTileBar
                                                 title={r.Title}
                                                 subtitle={<span>year: {r.Year}</span>}
-                                                actionIcon={
-                                                    <IconButton aria-label={`info about ${r.Title}`} className={classes.icon}>
-
-                                                    </IconButton>
-                                                }
                                             />
                                         </GridListTile>
                                    )}

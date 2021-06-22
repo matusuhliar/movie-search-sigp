@@ -1,7 +1,8 @@
 import React from 'react';
-import {Box, Container, makeStyles} from "@material-ui/core";
+import {AppBar, Box, Container, Divider, Grid, Link, makeStyles, Paper, Toolbar, Typography} from "@material-ui/core";
 import MovieList from "./pages/MovieList";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,20 +20,52 @@ const useStyles = makeStyles((theme) => ({
         marginBottom:"10px",
         padding:"10px 20px"
     },
-    title:{
-        padding: "0px 5px"
+    toolbar: {
+        flexWrap: 'wrap',
+    },
+    appBar: {
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        margin: theme.spacing(1, 0),
+    },
+    toolbarTitle: {
+        flexGrow: 1,
+    },
+    link: {
+        margin: theme.spacing(1, 1.5),
     }
 }));
 
 function App() {
+
+    const history = useHistory();
+
+    const openFavourites = () =>{
+        history.push('/favourites/')
+    }
+    const openSearch = () =>{
+        history.push('/')
+    }
     const classes = useStyles();
     return (
         <Container maxWidth="md" classes={classes.root}>
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={MovieList} />
-                </Switch>
-            </Router>
+            <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+                <Toolbar className={classes.toolbar}>
+                    <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+                        Movie Database
+                    </Typography>
+                    <nav>
+                        <Link variant="button" color="textPrimary" href="#" onClick={openSearch} className={classes.link}>
+                            Search
+                        </Link>
+                        <Link variant="button" color="textPrimary" href="#" onClick={openFavourites} className={classes.link}>
+                            Favorites
+                        </Link>
+                    </nav>
+                </Toolbar>
+            </AppBar>
+            <Switch>
+                <Route exact path="/" component={MovieList} />
+            </Switch>
         </Container>
     );
 }
