@@ -75,17 +75,6 @@ function MovieList() {
         if(qs.search!==lastSearch){
             setLastSearch(qs.search);
             dispatch(getMovies(qs.search))
-           /* fetch(`http://omdbapi.com/?${queryString.stringify({s:qs.search,apikey:API_KEY})}`).then(
-                response => response.json()
-            ).then(json=>{
-                if(json.Response === "True"){
-                    dispatch(setMovies(json.Search))
-                }else{
-                    dispatch(setMovies([]))
-                }
-            }).catch(e=>{
-                dispatch(setMovies([]))
-            })*/
         }
     });
 

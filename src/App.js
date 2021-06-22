@@ -3,6 +3,7 @@ import {AppBar, Box, Container, Divider, Grid, Link, makeStyles, Paper, Toolbar,
 import MovieList from "./pages/MovieList";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {useHistory} from "react-router";
+import MovieDetail from "./pages/MovieDetail";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,6 +66,7 @@ function App() {
             </AppBar>
             <Switch>
                 <Route exact path="/" component={MovieList} />
+                <Route exact path="/detail/:id" component={MovieDetail} />
             </Switch>
         </Container>
     );

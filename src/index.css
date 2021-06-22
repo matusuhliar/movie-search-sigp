@@ -1,3 +1,37 @@
 html,body{
     background: #6d6d6d;
 }
+.detail{
+    display:flex;
+    align-items: flex-start;
+}
+.detail *{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.detail .properties{
+    padding:0px 10px
+}
+.detail .properties .description{
+    font-size:12px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.detail .properties .item{
+    font-size:12px;
+    width:50%
+}
+.detail .properties .item b{
+    font-size:12px;
+    padding: 0px 0px;
+    padding-right: 3px;
+}
+.detail .properties .items{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.detail .properties h2{
+    padding:0px 0px;
+    margin:0px;
+}
