@@ -1,10 +1,6 @@
 import {
     Button,
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
-    Grid, GridList, GridListTile, GridListTileBar, IconButton,
+    Grid, GridList, GridListTile, GridListTileBar,
     makeStyles,
     Paper,
     TextField
