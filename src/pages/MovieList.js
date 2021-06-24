@@ -60,8 +60,6 @@ function MovieList() {
     //load results
     const movies = useSelector(state =>state.movies.movies)
     const total = useSelector(state => state.movies.total )
-    const [lastSearch, setLastSearch] = useState("");
-    const [lastPage, setLastPage] = useState(page);
 
     //set detail
     const openDetail = (id) =>{
@@ -70,12 +68,8 @@ function MovieList() {
 
     // load data on change
     useEffect(() => {
-        if(qs.search!==lastSearch || lastPage!==qs.page){
-            setLastSearch(qs.search);
-            setLastPage(qs.page)
-            dispatch(getMovies(qs.search,qs.page))
-        }
-    },[qs.search, qs.page, lastSearch, lastPage, dispatch]);
+        dispatch(getMovies(qs.search,qs.page))
+    },[qs.search, qs.page, dispatch]);
 
     return (
         <div>

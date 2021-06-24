@@ -30,16 +30,10 @@ const useStyles = makeStyles((theme) => ({
 function MovieDetail(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [lastId, setLastId] = useState("");
     const movie = useSelector(state =>state.movie.movie)
     useEffect(() => {
-
-        if(lastId!==props.match.params.id){
-            setLastId(props.match.params.id)
-            dispatch(getMovie(props.match.params.id))
-        }
-
-    },[lastId, props.match.params.id, dispatch]);
+        dispatch(getMovie(props.match.params.id))
+    },[props.match.params.id, dispatch]);
 
 
     const inLocalStorage = (id)=>{
